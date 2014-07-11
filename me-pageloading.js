@@ -1,69 +1,4 @@
 angular.module('me-pageloading', [])
-    .provider('mePageLoading', function() {
-
-        this.autoPageLoading = true;
-        this.effect = 'Lazy Stretch';
-
-        this.$get = ['mePageLoadingEffects', 'mePageLoadingTemplate', 'SVGLoader',
-
-            function(mePageLoadingEffects, mePageLoadingTemplate, SVGLoader) {
-                var self = this;
-
-                var effect, autoPageLoading, effectObj, effectStr, tmpStr, wraperDiv, loaderElement, loader;
-
-                effect = self.effect;
-                autoPageLoading = self.autoPageLoading;
-
-                effectObj = mePageLoadingEffects[effect];
-
-                if (effectObj.opening) {
-                    tmpStr = 'data-opening="' + effectObj.opening + '"';
-                } else {
-                    tmpStr = ''
-                }
-                effectStr = mePageLoadingTemplate.replace('{{dataOpen}}', tmpStr);
-
-                if (effectObj.closing) {
-                    tmpStr = 'data-closing="' + effectObj.closing + '"';
-                } else {
-                    tmpStr = '';
-                }
-                effectStr = effectStr.replace('{{dataClose}}', tmpStr);
-
-                if (effectObj.path) {
-                    tmpStr = 'd="' + effectObj.path + '"';
-                } else {
-                    tmpStr = '';
-                }
-                effectStr = effectStr.replace('{{path}}', tmpStr);
-
-                wraperDiv = document.createElement('div');
-                wraperDiv = angular.element(wraperDiv).html(effectStr);
-
-                loaderElement = wraperDiv.children();
-
-                angular.element(document.body).append(loaderElement);
-
-                loader = new SVGLoader(loaderElement, effectObj.option);
-
-                function show() {
-                    loader.show();
-                }
-
-                function hide() {
-                    loader.hide();
-                }
-
-                return {
-                    show: show,
-                    hide: hide,
-                    autoPageLoading: autoPageLoading,
-                    effect: effect
-                };
-            }
-        ];
-
-    })
     .value('mePageLoadingEffects', {
         'Lazy Stretch': {
             opening: 'M20,15 50,30 50,30 30,30 Z;M0,0 80,0 50,30 20,45 Z;M0,0 80,0 60,45 0,60 Z;M0,0 80,0 80,60 0,60 Z',
@@ -266,15 +201,79 @@ angular.module('me-pageloading', [])
 
         return SVGLoader;
     })
+    .provider('mePageLoading', function() {
+
+        this.autoPageLoading = true;
+        this.effect = 'Lazy Stretch';
+
+        this.$get = ['mePageLoadingEffects', 'mePageLoadingTemplate', 'SVGLoader',
+
+            function(mePageLoadingEffects, mePageLoadingTemplate, SVGLoader) {
+                var self = this,
+                    effect,
+                    autoPageLoading,
+                    effectObj,
+                    effectStr,
+                    wraperDiv,
+                    loaderElement,
+                    loader,
+                    openStr,
+                    closeStr,
+                    pathStr;
+
+                effect = self.effect;
+
+                autoPageLoading = self.autoPageLoading;
+
+                effectObj = mePageLoadingEffects[effect];
+                effectStr = mePageLoadingTemplate;
+
+                openStr = effectObj.opening ? ('data-opening="' + effectObj.opening + '"') : '';
+                closeStr = effectObj.closing ? ('data-closing="' + effectObj.closing + '"') : '';
+                pathStr = effectObj.path ? ('d="' + effectObj.path + '"') : '';
+
+                effectStr = effectStr.replace('{{dataOpen}}', openStr);
+                effectStr = effectStr.replace('{{dataClose}}', closeStr);
+                effectStr = effectStr.replace('{{path}}', pathStr);
+
+                wraperDiv = document.createElement('div');
+                wraperDiv = angular.element(wraperDiv).html(effectStr);
+
+                loaderElement = wraperDiv.children();
+
+                angular.element(document.body).append(loaderElement);
+
+                loader = new SVGLoader(loaderElement, effectObj.option);
+
+                function show() {
+                    loader.show();
+                }
+
+                function hide() {
+                    loader.hide();
+                }
+
+                return {
+                    show: show,
+                    hide: hide,
+                    autoPageLoading: autoPageLoading,
+                    effect: effect
+                };
+            }
+        ];
+
+    })
     .run(['$rootScope', 'mePageLoading',
         function($rootScope, mePageLoading) {
             if (!mePageLoading.autoPageLoading) {
                 return;
             }
 
-            var inited = false;
-
-            var init, changeStart, changeSuccess, changeError;
+            var inited = false,
+                init,
+                changeStart,
+                changeSuccess,
+                changeError;
 
             changeStart = function() {
                 mePageLoading.show();
