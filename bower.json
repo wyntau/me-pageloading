@@ -1,0 +1,27 @@
+{
+  "name": "me-pageloading",
+  "version": "0.0.1",
+  "authors": [
+    "Jeremial <jeremial90@gmail.com>"
+  ],
+  "description": "svg based pageloading for angular",
+  "main": "me-pageloading.js",
+  "keywords": [
+    "svg",
+    "pageloading",
+    "angular"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "Snap.svg": "~0.3.0",
+    "angular": "~1.2.19"
+  },
+  "homepage": "https://github.com/jeremial/me-pageloading"
+}
