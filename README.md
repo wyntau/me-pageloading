@@ -29,5 +29,5 @@ Compatible with `angular-route` and `angular-ui-router`.
 - `mePageLoadingProvider.autoPageLoading`, if the pageloading effect automatically show when `$stateChange*` or `$routeChange*` event trigger.
 
 #### Demos
-1. use with `angular-route`, [click](http://pageloading.angularjs.club/angular-route.html)
-2. use with `angular-ui-router`, [click](http://pageloading.angularjs.club/angular-ui-router.html)
+1. use with `angular-ui-router`(recommended), [click](http://pageloading.angularjs.club/angular-ui-router.html)
+2. use with `angular-route`, [click](http://pageloading.angularjs.club/angular-route.html)
