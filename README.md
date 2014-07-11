@@ -4,6 +4,10 @@ Pageloading effects for angular, inspired by [PageLoadingEffects](https://github
 
 Compatible with `angular-route` and `angular-ui-router`.
 
+### Install
+
+    bower install me-pageloading
+
 #### Usage
 1. include css and js files in your html
 2. include `me-pageloading` as a angular dependence.
