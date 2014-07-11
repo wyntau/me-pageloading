@@ -1,6 +1,6 @@
 ## me-pageloading
 
-Pageloading effects for angular, inspired by [PageLoadingEffects](https://github.com/codrops/PageLoadingEffects).
+Pageloading effects for angular, inspired by [PageLoadingEffects](http://tympanus.net/codrops/2014/04/23/page-loading-effects/).
 
 Compatible with `angular-route` and `angular-ui-router`.
 
@@ -8,14 +8,14 @@ Compatible with `angular-route` and `angular-ui-router`.
 
     bower install me-pageloading
 
-#### Usage
+### Usage
 1. include css and js files in your html
 2. include `me-pageloading` as a angular dependence.
 3. configure `mePageLoadingProvider`, this step is optional.
 
 `mePageLoadingProvider` has two options.
 
-- `mePageLoadingProvider.effect`, available effect name are listed below
+- `mePageLoadingProvider.effect`, default to `Lazy Stretch`, available effect names are listed below
 
     - Lazy Stretch
     - Circle
@@ -30,8 +30,14 @@ Compatible with `angular-route` and `angular-ui-router`.
     - Wave
     - Origami
     - Curtain
-- `mePageLoadingProvider.autoPageLoading`, if the pageloading effect automatically show when `$stateChange*` or `$routeChange*` event trigger.
+- `mePageLoadingProvider.autoPageLoading`, default to `true`, whether the pageloading automatically show when `$stateChange*` or `$routeChange*` event trigger.
 
-#### Demos
+### Demos
 1. use with `angular-ui-router`(recommended), [click](http://pageloading.angularjs.club/angular-ui-router.html)
 2. use with `angular-route`, [click](http://pageloading.angularjs.club/angular-route.html)
+
+### ThanksTo
+[Codrops](http://tympanus.net/codrops/2014/04/23/page-loading-effects/)
+
+### License
+MIT

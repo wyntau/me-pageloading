@@ -1,6 +1,6 @@
 {
   "name": "me-pageloading",
-  "version": "0.1.5",
+  "version": "0.2.0",
   "description": "svg based pageloading for angular",
   "main": "index.js",
   "scripts": {
