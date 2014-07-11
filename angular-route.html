@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="route">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="me-pageloading.min.css">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        html, body{
+            background: #4fc3f7;
+            width: 100%;
+            height: 100%;
+        }
+        a {
+            color: #fff;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 24px;
+            border-bottom: 2px solid #fff;
+            margin: 5px;
+        }
+        div.effects{
+            margin-left: 200px;
+            margin-right: 200px;
+            padding-top: 80px;
+        }
+        div.effects a{
+            display: inline-block;
+        }
+        div.demo{
+            width: 100%;
+            position: fixed;
+            text-align: center;
+            left: 50%;
+            top: 50%;
+            -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
+            -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+        }
+        a.demo{
+            font-size: 24px;
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+    <div ng-view></div>
+
+    <div class="effects">
+        <a href="?1" ng-click="go('?1')" class="effect">Lazy Stretch</a>
+        <a href="?2" ng-click="go('?2')" class="effect">Circle</a>
+        <a href="?3" ng-click="go('?3')" class="effect">Spill</a>
+        <a href="?4" ng-click="go('?4')" class="effect">Frame it</a>
+        <a href="?5" ng-click="go('?5')" class="effect">Tunnel vision</a>
+        <a href="?6" ng-click="go('?6')" class="effect">Windscreen wiper</a>
+        <a href="?7" ng-click="go('?7')" class="effect">Jammed blind</a>
+        <a href="?8" ng-click="go('?8')" class="effect">Parallelogram</a>
+        <a href="?9" ng-click="go('?9')" class="effect">Tilted</a>
+        <a href="?10" ng-click="go('?10')" class="effect">Lateral Swipe</a>
+        <a href="?11" ng-click="go('?11')" class="effect">Wave</a>
+        <a href="?12" ng-click="go('?12')" class="effect">Origami</a>
+        <a href="?13" ng-click="go('?13')" class="effect">Curtain</a>
+    </div>
+
+    <div class="demo">
+        <a class="demo" href="/">页面1</a>
+        <a class="demo" href="/test2">页面2</a>
+    </div>
+
+    <a href="https://github.com/jeremial/me-pageloading"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
+
+    <script>
+        var  pathname = window.location.pathname;
+        var search = window.location.search.substr(1) || '1';
+        var effectDict = ['', 'Lazy Stretch', 'Circle', 'Spill', 'Frame it', 'Tunnel vision', 'Windscreen wiper', 'Jammed blind', 'Parallelogram', 'Tilted', 'Lateral Swipe', 'Wave', 'Origami', 'Curtain'];
+        var effect = effectDict[parseInt(search)];
+    </script>
+    <script src="http://cdn.staticfile.org/snap.svg/0.2.0/snap.svg-min.js"></script>
+    <script src="http://cdn.staticfile.org/angular.js/1.2.18/angular.min.js"></script>
+    <script src="http://cdn.staticfile.org/angular.js/1.2.18/angular-route.min.js"></script>
+    <script src="me-pageloading.min.js"></script>
+    <script>
+        angular.module('route', [
+            'ngRoute',
+            'me-pageloading'
+        ])
+        .config(['$locationProvider', '$routeProvider', 'mePageLoadingProvider', function($locationProvider, $routeProvider, mePageLoadingProvider){
+            $locationProvider.html5Mode(true);
+
+            mePageLoadingProvider.autoPageLoading = true;
+            mePageLoadingProvider.effect = effect || 'Lazy Stretch';
+
+            $routeProvider.when('/', {
+                template: '<div></div>',
+                controller: 'test1',
+                resolve: {
+                    data: ['$q', function($q){
+                        var defer = $q.defer();
+                        setTimeout(function(){
+                            defer.resolve('test1');
+                        }, 1000);
+                        return defer.promise;
+                    }]
+                }
+            })
+            .when('/test2', {
+                template: '<div></div>',
+                controller: 'test2',
+                resolve: {
+                    data: ['$q', function($q){
+                        var defer = $q.defer();
+                        setTimeout(function(){
+                            defer.resolve('test1');
+                        }, 1000);
+                        return defer.promise;
+                    }]
+                }
+            })
+            .otherwise({
+                redirectTo: '/'
+            });
+
+        }])
+        .controller('test1', ['data', function(data){
+
+        }])
+        .controller('test2', ['data', function(data){
+
+        }])
+        .run(['$rootScope', '$window', function($rootScope, $window){
+            $rootScope.go = function(search){
+                $window.location.replace(pathname + search);
+            }
+        }])
+    </script>
+</body>
+</html>
