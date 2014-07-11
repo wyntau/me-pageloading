@@ -1,11 +1,11 @@
 {
   "name": "me-pageloading",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "authors": [
     "Jeremial <jeremial90@gmail.com>"
   ],
   "description": "svg based pageloading for angular",
-  "main": "me-pageloading.js",
+  "main": "me-pageloading.min.js",
   "keywords": [
     "svg",
     "pageloading",
