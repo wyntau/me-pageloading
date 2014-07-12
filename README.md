@@ -30,7 +30,11 @@ Compatible with `angular-route` and `angular-ui-router`.
     - Wave
     - Origami
     - Curtain
-- `mePageLoadingProvider.autoPageLoading`, whether the pageloading automatically show when `$stateChange*` or `$routeChange*` event trigger. Default to `true`. If you set to `false`, you should call `mePageLoading.show(effectName)` or `mePageLoading.hide()` to show or hide the animation.
+- `mePageLoadingProvider.autoPageLoading`, whether the pageloading automatically show when `$stateChange*` or `$routeChange*` event trigger. Default to `true`. If you set to `false`, you should call `mePageLoading#show` or `mePageLoading#hide` to show or hide the animation.
+
+### API
+- `mePageLoading.show([effectName])`, show animation, you can specify which animation to show. If not specify, mePageLoading will use the `effect` value set to `mePageLoadingProvider`. If no effectName is set to `mePageLoadingProvider`, the value is `random`.
+- `mePageLoading.hide()`, hide the current animation.
 
 ### Demos
 1. use with `angular-ui-router`(recommended), [click](http://pageloading.angularjs.club/angular-ui-router.html)
