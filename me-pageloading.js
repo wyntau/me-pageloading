@@ -284,7 +284,6 @@ angular.module('me-pageloading', [])
             };
 
             init = function() {
-                console.log('changeSuccess');
                 if (inited) {
                     return;
                 }
