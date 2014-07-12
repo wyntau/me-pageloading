@@ -37,8 +37,8 @@ Compatible with `angular-route` and `angular-ui-router`.
 - `mePageLoading.hide()`, hide the current animation.
 
 ### Demos
-1. use with `angular-ui-router`(recommended), [click](http://pageloading.angularjs.club/angular-ui-router.html)
-2. use with `angular-route`, [click](http://pageloading.angularjs.club/angular-route.html)
+1. use with `angular-ui-router`(recommended), [click](http://isay.me/me-pageloading/angular-ui-router.html)
+2. use with `angular-route`, [click](http://isay.me/me-pageloading/angular-route.html)
 
 ### ThanksTo
 [Codrops](http://tympanus.net/codrops/2014/04/23/page-loading-effects/)
