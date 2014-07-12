@@ -51,7 +51,7 @@
     <div class="demo">
         在
         <br />
-        <a class="demo" href="/">页面1</a> 与 <a class="demo" href="/test2">页面2</a>
+        <a class="demo" href="#/page1">页面1</a> 与 <a class="demo" href="#/page2">页面2</a>
         <br />之间随机切换
 
         <br />
@@ -88,45 +88,44 @@
             'ui.router',
             'me-pageloading'
         ])
-        .config(['$locationProvider', '$stateProvider', '$urlRouterProvider', 'mePageLoadingProvider', function($locationProvider, $stateProvider, $urlRouterProvider, mePageLoadingProvider){
-            $locationProvider.html5Mode(true);
+        .config(['$stateProvider', '$urlRouterProvider', 'mePageLoadingProvider', function($stateProvider, $urlRouterProvider, mePageLoadingProvider){
 
             $stateProvider
-            .state('test1', {
-                url: '/',
+            .state('page1', {
+                url: '/page1',
                 template: '<div></div>',
-                controller: 'test1',
+                controller: 'page1',
                 resolve: {
                     data: ['$q', function($q){
                         var defer = $q.defer();
                         setTimeout(function(){
-                            defer.resolve('test1');
+                            defer.resolve('page1');
                         }, 1500);
                         return defer.promise;
                     }]
                 }
             })
-            .state('test2', {
-                url: '/test2',
+            .state('page2', {
+                url: '/page2',
                 template: '<div></div>',
-                controller: 'test2',
+                controller: 'page2',
                 resolve: {
                     data: ['$q', function($q){
                         var defer = $q.defer();
                         setTimeout(function(){
-                            defer.resolve('test2');
+                            defer.resolve('page2');
                         }, 1500);
                         return defer.promise;
                     }]
                 }
             });
 
-            $urlRouterProvider.otherwise('/');
+            $urlRouterProvider.otherwise('/page1');
         }])
-        .controller('test1', ['data', function(data){
+        .controller('page1', ['data', function(data){
 
         }])
-        .controller('test2', ['data', function(data){
+        .controller('page2', ['data', function(data){
 
         }])
         .run(['$rootScope', '$window', 'mePageLoading', function($rootScope, $window, mePageLoading){
