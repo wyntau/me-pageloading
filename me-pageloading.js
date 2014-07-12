@@ -101,7 +101,6 @@ angular.module('me-pageloading', [])
 
             svg = Snap(this.el.find('svg')[0]);
             this.path = svg.select('path');
-            this.$path = this.el.find('path');
             this.effect = options.effect || 'random';
             this.animateOpt = null;
             this.isAnimating = false;
@@ -125,10 +124,10 @@ angular.module('me-pageloading', [])
             effect = newEffect || this.effect;
             effects = Object.keys(mePageLoadingEffects);
 
-            if(effect === 'random'){
+            if(effect === 'random' || effects.indexOf(effect) < 0){
                 effect = effects[Math.floor(Math.random() * 13)]
             }
-            effectObj = mePageLoadingEffects[effect] || mePageLoadingEffects[effects[0]];
+            effectObj = mePageLoadingEffects[effect];
 
             initialPath = effectObj.path;
 
