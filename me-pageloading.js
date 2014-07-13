@@ -178,7 +178,7 @@ angular.module('me-pageloading', [])
             self.animateOpt = animateOpt;
             self.isAnimating = true;
 
-            self.animateSVG('in', function(){
+            self.animateSVG('in', animateOpt, function(){
                 self.el.addClass('pageloading-loading');
             });
 
@@ -188,21 +188,20 @@ angular.module('me-pageloading', [])
         Animater.prototype.hide = function(){
             var self = this,
                 animateOpt = self.animateOpt;
-            if(!animateOpt){
+            if(!animateOpt){ // have stopped or is stopping the animation, just return
                 return false;
             }
+            self.animateOpt = null; // prevent hide one animation multi times
             self.el.removeClass('pageloading-loading');
-            self.animateSVG('out', function(){
-                self.animateOpt = null;
+            self.animateSVG('out', animateOpt, function(){
                 self.el.removeClass('show');
                 self.isAnimating = false;
             });
         };
 
-        Animater.prototype.animateSVG = function(dir, cbk){
+        Animater.prototype.animateSVG = function(dir, animateOpt, cbk){
             var self = this,
                 pos = 0,
-                animateOpt = self.animateOpt,
                 steps = dir === 'out' ? animateOpt.closingSteps : animateOpt.openingSteps,
                 stepsTotal = dir === 'out' ? animateOpt.closingStepsTotal: animateOpt.openingStepsTotal,
                 speed = dir === 'out' ? animateOpt.speedOut : animateOpt.speedIn,
