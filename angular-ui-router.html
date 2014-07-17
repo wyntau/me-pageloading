@@ -33,6 +33,7 @@
             transform: translateX(-50%);
         }
         a.demo{
+            cursor: pointer;
             text-align: center;
             color: #fff;
             font-weight: bold;
@@ -44,15 +45,15 @@
 
     </style>
 </head>
-<body>
+<body ng-controller="mainCtrl">
     <h1>me-pageloading</h1>
     <div ui-view></div>
 
     <div class="demo">
-        在
+        点击
         <br />
-        <a class="demo" href="#/page1">页面1</a> 与 <a class="demo" href="#/page2">页面2</a>
-        <br />之间随机切换
+        <a class="demo" ng-click="toggle()">此处</a>
+        <br />预览随机效果
 
         <br />
         <br />
@@ -128,15 +129,25 @@
         .controller('page2', ['data', function(data){
 
         }])
-        .run(['$rootScope', '$window', 'mePageLoading', function($rootScope, $window, mePageLoading){
-            $rootScope.effect = 'random';
-            $rootScope.show = function(){
-                mePageLoading.show($rootScope.effect);
+        .controller('mainCtrl', ['$scope', '$location', 'mePageLoading', function($scope, $location, mePageLoading){
+            $scope.effect = 'random';
+            $scope.show = function(){
+                // 手动调用动画
+                mePageLoading.show($scope.effect);
                 setTimeout(function(){
                     mePageLoading.hide();
                 }, 1500);
             };
-        }]);
+            $scope.toggle = function(){
+                // 自动调用动画
+                if($location.path() === '/page1'){
+                    $location.path('/page2');
+                }else{
+                    $location.path('/page1');
+                }
+            };
+        }])
+        ;
     </script>
 </body>
 </html>
