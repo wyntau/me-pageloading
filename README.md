@@ -15,7 +15,7 @@ Compatible with `angular-route` and `angular-ui-router`.
 
 `mePageLoadingProvider` has two options.
 
-- `mePageLoadingProvider.effect`, default to `Lazy Stretch`, available effect names are listed below
+- `mePageLoadingProvider.effect`, default to `random`, all available effect names are listed below
 
     - Lazy Stretch
     - Circle
