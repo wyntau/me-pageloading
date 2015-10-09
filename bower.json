@@ -5,7 +5,10 @@
     "Jeremial <jeremial90@gmail.com>"
   ],
   "description": "svg based pageloading for angular",
-  "main": "me-pageloading.js",
+  "main": [
+  "me-pageloading.js",
+  "me-pageloading.css"
+  ],
   "keywords": [
     "svg",
     "pageloading",
