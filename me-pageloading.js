@@ -232,22 +232,28 @@ angular.module('me-pageloading', [])
     .provider('mePageLoading', function() {
         this.autoPageLoading = true;
         this.effect = 'random';
-
+        this.timeOut = 500;
+        this.container = document.body;
         this.$get = ['mePageLoadingTemplate', 'Animater', function(mePageLoadingTemplate, Animater){
             var self = this,
                 autoPageLoading,
+                container,
+                timeOut,
                 wrapperDiv,
                 loaderElement,
                 loader;
 
             autoPageLoading = self.autoPageLoading;
 
+            container = self.container;
+            timeOut = self.timeOut;
+
             wrapperDiv = document.createElement('div');
             wrapperDiv = angular.element(wrapperDiv).html(mePageLoadingTemplate);
 
             loaderElement = wrapperDiv.children();
 
-            angular.element(document.body).append(loaderElement);
+            angular.element(container).append(loaderElement);
 
             loader = new Animater({
                 el: loaderElement,
@@ -259,13 +265,18 @@ angular.module('me-pageloading', [])
             }
 
             function hide(){
-                loader.hide();
+                setTimeout(function() {
+                    loader.hide();
+                }, timeOut);
+                
             }
 
             return {
                 show: show,
                 hide: hide,
-                autoPageLoading: autoPageLoading
+                autoPageLoading: autoPageLoading,
+                timeOut: timeOut,
+                container: container,
             };
         }];
     })
