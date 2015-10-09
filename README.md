@@ -15,6 +15,8 @@ Compatible with `angular-route` and `angular-ui-router`.
 
 `mePageLoadingProvider` has two options.
 
+- `mePageLoadingProvider.container`, default to `document.body`
+- `mePageLoadingProvider.timeOut`, default to `500`ms
 - `mePageLoadingProvider.effect`, default to `random`, all available effect names are listed below
 
     - Lazy Stretch
