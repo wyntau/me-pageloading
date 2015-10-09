@@ -234,7 +234,7 @@ angular.module('me-pageloading', [])
         this.effect = 'random';
         this.timeOut = 500;
         this.container = document.body;
-        this.$get = ['mePageLoadingTemplate', 'Animater', function(mePageLoadingTemplate, Animater){
+        this.$get = ['$timeout', 'mePageLoadingTemplate', 'Animater', function($timeout, mePageLoadingTemplate, Animater){
             var self = this,
                 autoPageLoading,
                 container,
@@ -265,10 +265,9 @@ angular.module('me-pageloading', [])
             }
 
             function hide(){
-                setTimeout(function() {
+                $timeout(function() {
                     loader.hide();
                 }, timeOut);
-                
             }
 
             return {
